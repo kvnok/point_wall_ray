@@ -36,7 +36,7 @@ function setup() {
 		}
 	}
 }
-	
+
 function draw()
 {
 	background('#FFFFFF');

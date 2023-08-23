@@ -56,13 +56,11 @@ class Player
 					if (endX >= x * box_size &&        // right of the left edge AND
 						endX <= x * box_size + box_size &&   // left of the right edge AND
 						endY >= y * box_size &&        // below the top AND
-						endY <= y * box_size + box_size) {   // above the bottom
+						endY <= y * box_size + box_size && // above the bottom
+						map[y][x] == 1) //only walls
+					{
 							blocks[y][x].change_color('#FF0000');
 					}
-					// else
-					// {
-					// 	blocks[y][x].change_color('#FFFFFF');
-					// }
 				}
 			}					
 		}
