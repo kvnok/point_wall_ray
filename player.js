@@ -4,7 +4,7 @@ class Player
 	{
 		this.x = x;
 		this.y = y;
-		this.size = player_size;
+		this.size = player_size/2;
 		this.speed = 4;
 	}
 
@@ -47,10 +47,22 @@ class Player
 			let radianAngle = radians(rayDirection);
 			let endX = this.x + rayLength * cos(radianAngle);
 			let endY = this.y + rayLength * sin(radianAngle);
-			drawRay(this.x + this.size/2, this.y + this.size/2, endX, endY);
-			for (let i = 0; i < rayLength/box_size * 10; i++)
+			let ret;
+			for (let i = 0; i < rayLength/box_size * 100; i++)
 			{
-				collision_check(this.x + (box_size / 10) * i * cos(radianAngle), this.y + (box_size / 10) * i * sin(radianAngle));
+				ret = collision_check(this.x + ((box_size / 100) * i * cos(radianAngle)),
+										this.y + ((box_size / 100) * i * sin(radianAngle)));
+				if (ret == true)
+				{
+					endX = this.x + ((box_size / 100) * i * cos(radianAngle));
+					endY = this.y + ((box_size / 100) * i * sin(radianAngle));
+					drawRay(this.x + this.size/2, this.y + this.size/2, endX, endY);
+					break;
+				}
+			}
+			if (ret == false)
+			{
+				drawRay(this.x + this.size/2, this.y + this.size/2, endX, endY);
 			}
 		}
 	}

@@ -6,14 +6,14 @@ let amount_of_blocks = screen_width/box_size;
 let dude;
 let blocks;
 let playerAngle;
-const numRays = 100;
-const rayLength = box_size * 5;
+const numRays = 50;
+const rayLength = box_size * 20;
 let map;
 
 function drawRay(x1, y1, x2, y2)
 {
 	stroke('#fca903');
-	strokeWeight(5);
+	strokeWeight(1);
 	line(x1, y1, x2, y2);
 	strokeWeight(1);
 	stroke('#000000');
@@ -33,9 +33,11 @@ function collision_check(x2, y2)
 				map[y][x] == 1) //only walls
 			{
 				blocks[y][x].change_color('#FF0000');
+				return true;
 			}
 		}
 	}
+	return false;
 }
 
 function setup() {
