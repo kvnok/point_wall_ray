@@ -19,6 +19,25 @@ function drawRay(x1, y1, x2, y2)
 	stroke('#000000');
 }
 
+//loop through all blocks and check if x2 and y2 is inside a block
+function collision_check(x2, y2)
+{
+	for (let y = 0; y < amount_of_blocks; y++)
+	{
+		for (let x = 0; x < amount_of_blocks; x++)
+		{
+			if (x2 >= x * box_size &&        // right of the left edge AND
+				x2 <= x * box_size + box_size &&   // left of the right edge AND
+				y2 >= y * box_size &&        // below the top AND
+				y2 <= y * box_size + box_size && // above the bottom
+				map[y][x] == 1) //only walls
+			{
+				blocks[y][x].change_color('#FF0000');
+			}
+		}
+	}
+}
+
 function setup() {
 	createCanvas(screen_width, screen_height);
 	playerAngle = 60.0; 

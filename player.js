@@ -43,26 +43,15 @@ class Player
 		const angleIncrement =  60.0 / numRays;
 		for (let rayIndex = 0; rayIndex < numRays; rayIndex++)
 		{
-			const rayDirection = (playerAngle % 360) - 90.0 + rayIndex * angleIncrement;
-			const radianAngle = radians(rayDirection);
-			const endX = this.x + rayLength * cos(radianAngle);
-			const endY = this.y + rayLength * sin(radianAngle);
+			let rayDirection = (playerAngle % 360) - 90.0 + rayIndex * angleIncrement;
+			let radianAngle = radians(rayDirection);
+			let endX = this.x + rayLength * cos(radianAngle);
+			let endY = this.y + rayLength * sin(radianAngle);
 			drawRay(this.x + this.size/2, this.y + this.size/2, endX, endY);
-			//loop through all blocks and check if endX and endY is inside a block
-			for (let y = 0; y < amount_of_blocks; y++)
+			for (let i = 0; i < rayLength/box_size * 10; i++)
 			{
-				for (let x = 0; x < amount_of_blocks; x++)
-				{
-					if (endX >= x * box_size &&        // right of the left edge AND
-						endX <= x * box_size + box_size &&   // left of the right edge AND
-						endY >= y * box_size &&        // below the top AND
-						endY <= y * box_size + box_size && // above the bottom
-						map[y][x] == 1) //only walls
-					{
-							blocks[y][x].change_color('#FF0000');
-					}
-				}
-			}					
+				collision_check(this.x + (box_size / 10) * i * cos(radianAngle), this.y + (box_size / 10) * i * sin(radianAngle));
+			}
 		}
 	}
 }
